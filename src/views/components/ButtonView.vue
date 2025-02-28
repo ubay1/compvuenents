@@ -2,6 +2,7 @@
 <script setup lang="ts">
 import Button, { type ButtonVariant, type ButtonSize } from '@/components/elements/Button.vue'
 import BasicTable, { type TableColumn } from '@/components/elements/table/Basic.vue'
+import HighlightCode from '@/components/elements/HighlightCode.vue'
 
 const variantsButton: ButtonVariant[] = ['primary', 'secondary', 'danger', 'warning', 'info']
 const sizeButton: ButtonSize[] = ['sm', 'md', 'lg']
@@ -16,6 +17,10 @@ const columnsProps: TableColumn[] = [
     label: 'Type',
   },
   {
+    key: 'opsional',
+    label: 'Opsional',
+  },
+  {
     key: 'default',
     label: 'Default',
   },
@@ -28,36 +33,42 @@ const dataProps = [
   {
     name: 'type',
     type: 'String',
+    opsional: 'true',
     default: 'fill',
     value: 'fill/outline',
   },
   {
     name: 'variant',
     type: 'String',
+    opsional: 'true',
     default: 'primary',
     value: 'primary,secondary, danger,success',
   },
   {
     name: 'size',
     type: 'String',
+    opsional: 'true',
     default: 'md',
     value: 'sm, md, lg',
   },
   {
     name: 'rounded',
     type: 'Boolean',
+    opsional: 'true',
     default: 'false',
     value: 'true/false',
   },
   {
     name: 'block',
     type: 'Boolean',
+    opsional: 'true',
     default: 'false',
     value: 'true/false',
   },
   {
     name: 'disabled',
     type: 'Boolean',
+    opsional: 'true',
     default: 'false',
     value: 'true/false',
   },
@@ -89,7 +100,7 @@ const dataEvents = [
     </p>
 
     <!-- Example -->
-    <div class="mt-6 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-[0px_4px_16px_0px_#00000014]">
+    <div class="mt-6 mx-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-gmail">
       <div class="mt-4 flex flex-col flex-wrap gap-4">
         <div class="flex flex-wrap gap-2">
           <Button
@@ -206,9 +217,9 @@ const dataEvents = [
     <!-- Usage -->
     <div class="mt-6">
       <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
-      <div class="mt-4 bg-gray-800 rounded-md p-4">
-        <pre class="text-gray-200 overflow-x-auto">
-<code>&lt;Button
+
+      <HighlightCode language="">
+        <pre><code>&lt;Button
   :block="false"
   :rounded="false"
   :disabled="true"
@@ -219,8 +230,8 @@ const dataEvents = [
 &gt;
   Submit
 &lt;/Button&gt;</code>
-</pre>
-      </div>
+  </pre>
+      </HighlightCode>
     </div>
 
     <!-- Props -->

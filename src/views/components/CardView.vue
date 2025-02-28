@@ -1,144 +1,143 @@
-<script setup lang="ts"></script>
+<script setup lang="ts">
+import Card from '@/components/elements/Card.vue'
+import BasicTable, { type TableColumn } from '@/components/elements/table/Basic.vue'
+import HighlightCode from '@/components/elements/HighlightCode.vue'
+
+const columnsProps: TableColumn[] = [
+  {
+    key: 'name',
+    label: 'Name',
+  },
+  {
+    key: 'type',
+    label: 'Type',
+  },
+  {
+    key: 'opsional',
+    label: 'Opsional',
+  },
+  {
+    key: 'default',
+    label: 'Default',
+  },
+  {
+    key: 'value',
+    label: 'List Value',
+  },
+]
+const dataProps = [
+  {
+    name: 'title',
+    type: 'String',
+    opsional: 'true',
+    default: '',
+    value: '',
+  },
+  {
+    name: 'description',
+    type: 'String',
+    opsional: 'true',
+    default: '',
+    value: '',
+  },
+  {
+    name: 'imageUrl',
+    type: 'String',
+    opsional: 'true',
+    default: '',
+    value: '',
+  },
+  {
+    name: 'imageAlt',
+    type: 'String',
+    opsional: 'true',
+    default: 'Card image',
+    value: '',
+  },
+]
+
+const columnsEvents: TableColumn[] = [
+  {
+    key: 'name',
+    label: 'Name',
+  },
+  {
+    key: 'description',
+    label: 'Description',
+  },
+]
+const dataEvents = [
+  {
+    name: 'click',
+    description: 'Event yang akan dijalankan ketika card diklik.',
+  },
+]
+</script>
 
 <template>
-  <div id="card" class="pb-12 border-t border-gray-200 pt-12">
-    <h3 class="text-2xl font-bold text-gray-900">Card</h3>
-    <p class="mt-2 text-gray-600">
+  <div id="button" class="pb-12 w-full">
+    <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-300">Card</h3>
+    <p class="mt-2 text-gray-600 dark:text-gray-500">
       Komponen card untuk menampilkan konten dalam container yang terisolasi.
     </p>
 
     <!-- Example -->
-    <div class="mt-6 bg-white p-6 rounded-lg shadow-md">
-      <h4 class="text-lg font-medium text-gray-900">Contoh</h4>
-      <div class="mt-4">
-        <div class="bg-white border border-gray-200 rounded-lg shadow-md overflow-hidden">
-          <div class="p-5">
-            <h5 class="text-xl font-semibold text-gray-900 mb-2">Card Title</h5>
-            <p class="text-gray-600">
-              Lorem ipsum dolor sit amet, consectetur adipiscing elit. Nullam in dui mauris.
-            </p>
-            <div class="mt-4">
-              <button class="px-4 py-2 bg-indigo-600 text-white rounded-md hover:bg-indigo-700">
-                Read More
-              </button>
-            </div>
-          </div>
-        </div>
+    <div class="mt-6 mx-1 bg-white p-6 rounded-lg shadow-gmail">
+      <div class="mt-4 flex flex-col flex-wrap gap-4">
+        <Card
+          title="Card Title"
+          description="This is the card description with some text."
+          imageUrl="https://wallpapers.com/images/hd/vue-js-programming-nmw3bm4aj9o70p7k.jpg"
+          :clickable="true"
+        >
+          <!-- <p class="text-gray-500">This is additional content in the default slot.</p> -->
+          <template #footer>
+            <button>Action Button</button>
+          </template>
+        </Card>
+
+        <Card title="Card Title" :clickable="true">
+          <p class="text-gray-500 dark:text-gray-300">
+            This is card description in the default slot. Lorem ipsum dolor sit, amet consectetur
+            adipisicing elit. Iure ducimus ipsa pariatur quod vitae omnis, vel qui reprehenderit
+            ipsum eius dolorum adipisci minus excepturi officiis deleniti. Debitis ullam magnam
+            dignissimos?
+          </p>
+          <template #footer>
+            <button>Action Button</button>
+          </template>
+        </Card>
       </div>
     </div>
 
     <!-- Usage -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900">Penggunaan</h4>
-      <div class="mt-4 bg-gray-800 rounded-md p-4">
-        <pre class="text-gray-200 overflow-x-auto">
-<code>&lt;Card
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
+      <HighlightCode language="">
+        <pre><code>&lt;Card
   title="Card Title"
-  :has-shadow="true"
+  description="This is the card description with some text."
+  imageUrl="https://wallpapers.com/images/hd/vue-js-programming-nmw3bm4aj9o70p7k.jpg"
+  :clickable="true"
 &gt;
-  &lt;template #content&gt;
-    Lorem ipsum dolor sit amet, consectetur adipiscing elit.
-  &lt;/template&gt;
   &lt;template #footer&gt;
-    &lt;Button variant="primary"&gt;Read More&lt;/Button&gt;
+    &lt;button&gt;Action Button&lt;/button&gt;
   &lt;/template&gt;
 &lt;/Card&gt;</code>
-                </pre>
-      </div>
+  </pre>
+      </HighlightCode>
     </div>
 
     <!-- Props -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900">Props</h4>
-      <div class="mt-4 overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th
-                scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Nama
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Tipe
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Default
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Deskripsi
-              </th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">title</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">String</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">''</td>
-              <td class="px-6 py-4 text-sm text-gray-500">Judul card</td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">
-                hasShadow
-              </td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">Boolean</td>
-              <td class="px-6 py-4 whitespace-nowrap text-sm text-gray-500">true</td>
-              <td class="px-6 py-4 text-sm text-gray-500">Apakah card memiliki shadow</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Props</h4>
+      <BasicTable :columns="columnsProps" :data="dataProps" />
     </div>
 
     <!-- Slots -->
     <div class="mt-6">
       <h4 class="text-lg font-medium text-gray-900">Slots</h4>
-      <div class="mt-4 overflow-hidden">
-        <table class="min-w-full divide-y divide-gray-200">
-          <thead class="bg-gray-50">
-            <tr>
-              <th
-                scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Nama
-              </th>
-              <th
-                scope="col"
-                class="px-6 py-3 text-left text-xs font-medium text-gray-500 uppercase tracking-wider"
-              >
-                Deskripsi
-              </th>
-            </tr>
-          </thead>
-          <tbody class="bg-white divide-y divide-gray-200">
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">default</td>
-              <td class="px-6 py-4 text-sm text-gray-500">Konten utama card</td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">header</td>
-              <td class="px-6 py-4 text-sm text-gray-500">
-                Bagian header, menggantikan title jika digunakan
-              </td>
-            </tr>
-            <tr>
-              <td class="px-6 py-4 whitespace-nowrap text-sm font-medium text-gray-900">footer</td>
-              <td class="px-6 py-4 text-sm text-gray-500">Bagian footer</td>
-            </tr>
-          </tbody>
-        </table>
-      </div>
+      <BasicTable :columns="columnsEvents" :data="dataEvents" />
     </div>
   </div>
 </template>

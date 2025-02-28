@@ -2,3 +2,10 @@
 
 @custom-variant dark (&:where(.dark, .dark *));
 @source "../utils/tailwind-safelist.txt";
+@theme {
+  --shadow-gmail: 0px 1px 1px 0 rgba(65, 69, 73, 0.3), 0 1px 3px 1px rgba(65, 69, 73, 0.15);
+  --shadow-card: 0px 1px 2px rgba(0, 0, 0, 0.12);
+  --shadow-inset:
+    inset 0 -1px 1px rgba(33, 71, 41, 0.15), 0 0.25rem 1.5rem rgba(255, 255, 255, 0.75);
+  --shadow-standard: 0px 0px 10px #d9d9d9;
+}
