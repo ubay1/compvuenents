@@ -68,8 +68,8 @@ const columnsEvents: TableColumn[] = [
 ]
 const dataEvents = [
   {
-    name: 'click',
-    description: 'Event yang akan dijalankan ketika card diklik.',
+    name: '-',
+    description: '-',
   },
 ]
 </script>
@@ -88,7 +88,6 @@ const dataEvents = [
           title="Card Title"
           description="This is the card description with some text."
           imageUrl="https://wallpapers.com/images/hd/vue-js-programming-nmw3bm4aj9o70p7k.jpg"
-          :clickable="true"
         >
           <!-- <p class="text-gray-500">This is additional content in the default slot.</p> -->
           <template #footer>
@@ -96,7 +95,7 @@ const dataEvents = [
           </template>
         </Card>
 
-        <Card title="Card Title" :clickable="true">
+        <Card title="Card Title">
           <p class="text-gray-500 dark:text-gray-300">
             This is card description in the default slot. Lorem ipsum dolor sit, amet consectetur
             adipisicing elit. Iure ducimus ipsa pariatur quod vitae omnis, vel qui reprehenderit

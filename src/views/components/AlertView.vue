@@ -29,31 +29,31 @@ const columnsProps: TableColumn[] = [
 ]
 const dataProps = [
   {
+    name: 'type',
+    type: 'String',
+    opsional: 'false',
+    default: '',
+    value: `info | success | warning | error`,
+  },
+  {
     name: 'title',
     type: 'String',
-    opsional: 'true',
+    opsional: 'false',
     default: '',
     value: '',
   },
   {
-    name: 'description',
+    name: 'message',
     type: 'String',
-    opsional: 'true',
+    opsional: 'false',
     default: '',
     value: '',
   },
   {
-    name: 'imageUrl',
-    type: 'String',
-    opsional: 'true',
+    name: 'visible',
+    type: 'Boolean',
+    opsional: 'false',
     default: '',
-    value: '',
-  },
-  {
-    name: 'imageAlt',
-    type: 'String',
-    opsional: 'true',
-    default: 'Card image',
     value: '',
   },
 ]
@@ -70,8 +70,8 @@ const columnsEvents: TableColumn[] = [
 ]
 const dataEvents = [
   {
-    name: 'click',
-    description: 'Event yang akan dijalankan ketika card diklik.',
+    name: 'close',
+    description: 'Event yang dijalankan saat user klik icon X',
   },
 ]
 
@@ -96,9 +96,9 @@ const showAlert = ref(true)
           @close="showAlert = false"
         />
 
-        <Button variant="primary" :block="true" class="rounded-md" @click="showAlert = true"
-          >Tampilkan Alert</Button
-        >
+        <Button variant="primary" :block="true" class="rounded-md" @click="showAlert = !showAlert">
+          Show/Hide Alert
+        </Button>
       </div>
     </div>
 
@@ -106,16 +106,13 @@ const showAlert = ref(true)
     <div class="mt-6">
       <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
       <HighlightCode language="">
-        <pre><code>&lt;Card
-  title="Card Title"
-  description="This is the card description with some text."
-  imageUrl="https://wallpapers.com/images/hd/vue-js-programming-nmw3bm4aj9o70p7k.jpg"
-  :clickable="true"
-&gt;
-  &lt;template #footer&gt;
-    &lt;button&gt;Action Button&lt;/button&gt;
-  &lt;/template&gt;
-&lt;/Card&gt;</code>
+        <pre><code>&lt;Alert
+  type="success"
+  title="Lorem!"
+  message="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore!"
+  :visible="showAlert"
+  @close="showAlert = false"
+/&gt;</code>
   </pre>
       </HighlightCode>
     </div>

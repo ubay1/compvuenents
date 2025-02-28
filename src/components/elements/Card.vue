@@ -4,7 +4,6 @@ interface CardProps {
   description?: string
   imageUrl?: string
   imageAlt?: string
-  click?: boolean
 }
 
 const props = withDefaults(defineProps<CardProps>(), {
@@ -12,17 +11,12 @@ const props = withDefaults(defineProps<CardProps>(), {
   description: '',
   imageUrl: '',
   imageAlt: 'Card image',
-  click: false,
 })
 </script>
 
 <template>
   <div
-    class="overflow-hidden rounded-lg transition-all duration-200 bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/30"
-    :class="{
-      'cursor-pointer hover:shadow-lg dark:hover:shadow-gray-900/40 hover:-translate-y-1':
-        props.click,
-    }"
+    class="overflow-hidden rounded-lg transition-all duration-200 bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/30 hover:shadow-lg dark:hover:shadow-gray-900/40"
   >
     <div v-if="props.imageUrl" class="w-full h-48 overflow-hidden">
       <img :src="props.imageUrl" :alt="props.imageAlt" class="object-cover w-full h-full" />

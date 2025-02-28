@@ -51,7 +51,7 @@ export const buttonVariant = tv({
       primary:
         'bg-transparent hover:bg-green-50 text-green-600 border border-green-600 dark:text-green-400 dark:border-green-400 dark:hover:bg-green-900/30',
       secondary:
-        'bg-transparent hover:bg-gray-50 text-gray-600 border border-gray-500 dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-800',
+        'bg-transparent hover:bg-gray-100 text-gray-600 border border-gray-500 dark:text-gray-300 dark:border-gray-400 dark:hover:bg-gray-900/30',
       danger:
         'bg-transparent hover:bg-red-50 text-red-600 border border-red-500 dark:text-red-400 dark:border-red-400 dark:hover:bg-red-900/30',
       warning:
@@ -59,6 +59,21 @@ export const buttonVariant = tv({
       info: 'bg-transparent hover:bg-cyan-50 text-cyan-600 border border-cyan-500 dark:text-cyan-400 dark:border-cyan-400 dark:hover:bg-cyan-900/30',
       disabled:
         'bg-transparent text-gray-300 border border-gray-200 cursor-not-allowed dark:text-gray-600 dark:border-gray-700',
+    },
+  },
+})
+
+export const alertVariant = tv({
+  base: 'p-4 mb-4 rounded-lg relative border flex items-start',
+  variants: {
+    color: {
+      info: 'bg-blue-100 border-blue-200 text-blue-900 dark:bg-blue-950 dark:border-blue-800 dark:text-blue-200',
+      success:
+        'bg-green-100 border-green-200 text-green-900 dark:bg-green-950 dark:border-green-800 dark:text-green-200',
+      warning:
+        'bg-yellow-100 border-yellow-200 text-yellow-800 dark:bg-yellow-900 dark:border-yellow-700 dark:text-yellow-200',
+      error:
+        'bg-red-100 border-red-200 text-red-900 dark:bg-red-950 dark:border-red-800 dark:text-red-200',
     },
   },
 })
