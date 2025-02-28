@@ -16,14 +16,17 @@ const router = createRouter({
     {
       path: '/components/button',
       name: 'components-button',
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/components/ButtonView.vue'),
     },
     {
       path: '/components/card',
       name: 'components-card',
-      // which is lazy-loaded when the route is visited.
       component: () => import('../views/components/CardView.vue'),
+    },
+    {
+      path: '/components/alert',
+      name: 'components-alert',
+      component: () => import('../views/components/AlertView.vue'),
     },
   ],
 })
