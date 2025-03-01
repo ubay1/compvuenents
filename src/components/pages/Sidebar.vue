@@ -6,16 +6,20 @@ const route = useRoute()
 
 const komponenDasar = [
   {
+    name: 'Accordion',
+    path: '/components/accordion',
+  },
+  {
+    name: 'Alert',
+    path: '/components/alert',
+  },
+  {
     name: 'Button',
     path: '/components/button',
   },
   {
     name: 'Card',
     path: '/components/card',
-  },
-  {
-    name: 'Alert',
-    path: '/components/alert',
   },
   {
     name: 'Modal',

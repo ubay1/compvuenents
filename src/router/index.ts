@@ -14,6 +14,16 @@ const router = createRouter({
       component: () => import('../views/PlaygroundView.vue'),
     },
     {
+      path: '/components/accordion',
+      name: 'components-accordion',
+      component: () => import('../views/components/AccordionView.vue'),
+    },
+    {
+      path: '/components/alert',
+      name: 'components-alert',
+      component: () => import('../views/components/AlertView.vue'),
+    },
+    {
       path: '/components/button',
       name: 'components-button',
       component: () => import('../views/components/ButtonView.vue'),
@@ -22,11 +32,6 @@ const router = createRouter({
       path: '/components/card',
       name: 'components-card',
       component: () => import('../views/components/CardView.vue'),
-    },
-    {
-      path: '/components/alert',
-      name: 'components-alert',
-      component: () => import('../views/components/AlertView.vue'),
     },
     {
       path: '/components/modal',
