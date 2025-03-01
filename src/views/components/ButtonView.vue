@@ -90,6 +90,18 @@ const dataEvents = [
     description: 'Event yang akan dijalankan ketika button diklik.',
   },
 ]
+
+const highlightCode = `<Button
+  :block="false"
+  :rounded="false"
+  :disabled="true"
+  size="md"
+  type="fill"
+  variant="primary"
+  @click="() => console.log('clicked')"
+>
+  Submit
+</Button>`
 </script>
 
 <template>
@@ -216,18 +228,7 @@ const dataEvents = [
       <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
 
       <HighlightCode language="">
-        <pre><code>&lt;Button
-  :block="false"
-  :rounded="false"
-  :disabled="true"
-  size="md"
-  type="fill"
-  variant="primary"
-  @click="() => console.log('clicked')"
-&gt;
-  Submit
-&lt;/Button&gt;</code>
-  </pre>
+        {{ highlightCode }}
       </HighlightCode>
     </div>
 

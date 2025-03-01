@@ -75,6 +75,14 @@ const dataEvents = [
   },
 ]
 
+const highlightCode = `<Alert
+  type="info"
+  title="Lorem!"
+  message="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore!"
+  :visible="showAlert"
+  @close="showAlert = false"
+/>`
+
 const showAlert = ref(true)
 </script>
 
@@ -103,14 +111,7 @@ const showAlert = ref(true)
     <div class="mt-6">
       <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
       <HighlightCode language="">
-        <pre><code>&lt;Alert
-  type="success"
-  title="Lorem!"
-  message="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore!"
-  :visible="showAlert"
-  @close="showAlert = false"
-/&gt;</code>
-  </pre>
+        {{ highlightCode }}
       </HighlightCode>
     </div>
 

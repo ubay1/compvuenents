@@ -75,6 +75,40 @@ const dataEvents = [
   },
 ]
 
+const columnsSlots: TableColumn[] = [
+  {
+    key: 'name',
+    label: 'Name',
+  },
+  {
+    key: 'description',
+    label: 'Description',
+  },
+]
+const dataSlots = [
+  {
+    name: '<slot></slot>',
+    description: 'untuk menampilkan data content dinamis',
+  },
+]
+
+const highlightCode = `<Modal
+  :is-open="isModalOpen"
+  transition-type="zoom"
+  title="Lorem!"
+  message="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore! inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore!"
+  :bg-blur="true"
+  @close="closeModal"
+>
+  <p>
+    Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam
+    cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel?
+    Quia temporibus fuga dolore! inventore nisi porro eos mollitia praesentium aperiam
+    eligendi vitae vel? Quia temporibus fuga dolore!
+  </p>
+</Modal>
+`
+
 // State untuk mengontrol modal
 const isModalOpen = ref(false)
 
@@ -123,15 +157,7 @@ const closeModal = () => {
     <div class="mt-6">
       <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
       <HighlightCode language="">
-        <pre><code>&lt;Modal
-  :is-open="isModalOpen"
-  transition-type="slide"
-  title="Lorem!"
-  message="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore!"
-  :bg-blur="true"
-  @close="closeModal"
-/&gt;</code>
-  </pre>
+        {{ highlightCode }}
       </HighlightCode>
     </div>
 
@@ -141,10 +167,16 @@ const closeModal = () => {
       <BasicTable :columns="columnsProps" :data="dataProps" />
     </div>
 
+    <!-- Events -->
+    <div class="mt-6">
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Events</h4>
+      <BasicTable :columns="columnsEvents" :data="dataEvents" />
+    </div>
+
     <!-- Slots -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900">Slots</h4>
-      <BasicTable :columns="columnsEvents" :data="dataEvents" />
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Slots</h4>
+      <BasicTable :columns="columnsSlots" :data="dataSlots" />
     </div>
   </div>
 </template>

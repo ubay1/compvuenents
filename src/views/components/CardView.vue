@@ -76,6 +76,17 @@ const dataSlots = [
     description: 'untuk menampilkan footer pada card',
   },
 ]
+
+const highlightCode = `<Card title="Card Title">
+  <p class="text-gray-500 dark:text-gray-300">
+    This is card description in the default slot
+  </p>
+  <div>🤖🤖 Holla</div>
+
+  <template #footer>
+    <button>Action Button</button>
+  </template>
+</Card>`
 </script>
 
 <template>
@@ -113,21 +124,7 @@ const dataSlots = [
     <div class="mt-6">
       <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
       <HighlightCode language="">
-        <pre><code>&lt;Card
-  title="Card Title"
-  description="This is the card description with some text."
-  imageUrl="https://wallpapers.com/images/hd/vue-js-programming-nmw3bm4aj9o70p7k.jpg"
-  :clickable="true"
-&gt;
-  &lt;p class="text-gray-500 dark:text-gray-300"&gt;
-    This is card description in the default slot
-  &lt;/p&gt;
-  &lt;div &gt; 🤖🤖 Holla &lt;/div&gt;
-  &lt;template #footer&gt;
-    &lt;button&gt;Action Button&lt;/button&gt;
-  &lt;/template&gt;
-&lt;/Card&gt;</code>
-  </pre>
+        {{ highlightCode }}
       </HighlightCode>
     </div>
 
