@@ -95,9 +95,6 @@ const dataEvents = [
 <template>
   <div id="button" class="pb-12 w-full">
     <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-300">Button</h3>
-    <p class="mt-2 text-gray-600 dark:text-gray-500">
-      Komponen button yang dapat dikustomisasi sesuai kebutuhan.
-    </p>
 
     <!-- Example -->
     <div class="mt-6 mx-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-gmail">

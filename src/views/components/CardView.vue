@@ -56,7 +56,7 @@ const dataProps = [
   },
 ]
 
-const columnsEvents: TableColumn[] = [
+const columnsSlots: TableColumn[] = [
   {
     key: 'name',
     label: 'Name',
@@ -66,10 +66,14 @@ const columnsEvents: TableColumn[] = [
     label: 'Description',
   },
 ]
-const dataEvents = [
+const dataSlots = [
   {
-    name: '-',
-    description: '-',
+    name: '<slot></slot>',
+    description: 'untuk menampilkan data content dinamis',
+  },
+  {
+    name: '<template #footer></template>',
+    description: 'untuk menampilkan footer pada card',
   },
 ]
 </script>
@@ -77,9 +81,6 @@ const dataEvents = [
 <template>
   <div id="button" class="pb-12 w-full">
     <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-300">Card</h3>
-    <p class="mt-2 text-gray-600 dark:text-gray-500">
-      Komponen card untuk menampilkan konten dalam container yang terisolasi.
-    </p>
 
     <!-- Example -->
     <div class="mt-6 mx-1 bg-white p-6 rounded-lg shadow-gmail">
@@ -97,11 +98,10 @@ const dataEvents = [
 
         <Card title="Card Title">
           <p class="text-gray-500 dark:text-gray-300">
-            This is card description in the default slot. Lorem ipsum dolor sit, amet consectetur
-            adipisicing elit. Iure ducimus ipsa pariatur quod vitae omnis, vel qui reprehenderit
-            ipsum eius dolorum adipisci minus excepturi officiis deleniti. Debitis ullam magnam
-            dignissimos?
+            This is card description in the default slot
           </p>
+          <div>🤖🤖 Holla</div>
+
           <template #footer>
             <button>Action Button</button>
           </template>
@@ -119,6 +119,10 @@ const dataEvents = [
   imageUrl="https://wallpapers.com/images/hd/vue-js-programming-nmw3bm4aj9o70p7k.jpg"
   :clickable="true"
 &gt;
+  &lt;p class="text-gray-500 dark:text-gray-300"&gt;
+    This is card description in the default slot
+  &lt;/p&gt;
+  &lt;div &gt; 🤖🤖 Holla &lt;/div&gt;
   &lt;template #footer&gt;
     &lt;button&gt;Action Button&lt;/button&gt;
   &lt;/template&gt;
@@ -135,8 +139,8 @@ const dataEvents = [
 
     <!-- Slots -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900">Slots</h4>
-      <BasicTable :columns="columnsEvents" :data="dataEvents" />
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Slots</h4>
+      <BasicTable :columns="columnsSlots" :data="dataSlots" />
     </div>
   </div>
 </template>

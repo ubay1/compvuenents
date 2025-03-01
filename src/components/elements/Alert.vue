@@ -32,7 +32,7 @@ const alertIcons: Record<string, string> = {
 
     <!-- Close Button -->
     <button
-      class="absolute top-2.5 right-3 bg-transparent border-none text-xl cursor-pointer"
+      class="absolute top-1.5 right-3 bg-transparent border-none text-2xl cursor-pointer"
       @click="emit('close')"
     >
       ×

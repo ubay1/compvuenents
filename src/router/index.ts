@@ -28,6 +28,11 @@ const router = createRouter({
       name: 'components-alert',
       component: () => import('../views/components/AlertView.vue'),
     },
+    {
+      path: '/components/modal',
+      name: 'components-modal',
+      component: () => import('../views/components/ModalView.vue'),
+    },
   ],
 })
 
