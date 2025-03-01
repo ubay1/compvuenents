@@ -9,3 +9,15 @@
     inset 0 -1px 1px rgba(33, 71, 41, 0.15), 0 0.25rem 1.5rem rgba(255, 255, 255, 0.75);
   --shadow-standard: 0px 0px 10px #d9d9d9;
 }
+@layer utilities {
+  .w-fill {
+    width: -webkit-fill-available;
+    width: -moz-available;
+    width: fill-available;
+  }
+  .h-fill {
+    height: -webkit-fill-available;
+    height: -moz-available;
+    height: fill-available;
+  }
+}

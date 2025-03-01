@@ -29,7 +29,9 @@ onMounted(() => {
 </script>
 
 <template>
-  <aside class="w-full md:w-44 md:flex-shrink-0 pr-4 border-r border-gray-200 dark:border-gray-700">
+  <aside
+    class="w-full min-h-screen md:w-44 md:flex-shrink-0 pr-4 border-r border-gray-200 dark:border-gray-700"
+  >
     <div class="sticky top-6">
       <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
         Komponen Dasar
