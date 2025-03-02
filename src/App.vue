@@ -4,7 +4,7 @@ import { useDark } from '@vueuse/core'
 import { RouterLink, RouterView } from 'vue-router'
 import Navbar from '@/components/pages/Navbar.vue'
 import Sidebar from '@/components/pages/Sidebar.vue'
-import { appearance } from '@/utils/tailwind-variants'
+import { appearance } from '@/utils/tw-variants/components/appearance'
 
 const isDark = useDark()
 </script>

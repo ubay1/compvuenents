@@ -1,6 +1,6 @@
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
-import { buttonVariant } from '@/utils/tailwind-variants'
+import { buttonVariant } from '@/utils/tw-variants/components/button'
 
 type ButtonType = 'fill' | 'outline'
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'warning' | 'info'

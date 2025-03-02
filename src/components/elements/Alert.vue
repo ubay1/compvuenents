@@ -1,5 +1,5 @@
 <script setup lang="ts">
-import { alertVariant } from '@/utils/tailwind-variants'
+import { alertVariant } from '@/utils/tw-variants/components/alert'
 
 interface AlertProps {
   type: 'info' | 'success' | 'warning' | 'error'
@@ -11,6 +11,8 @@ interface AlertProps {
 const props = defineProps<AlertProps>()
 const emit = defineEmits(['close'])
 
+const { base, buttonX } = alertVariant({ color: props.type })
+
 // Objek ikon SVG
 const alertIcons: Record<string, string> = {
   info: `<svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24"><g fill="currentColor"><path d="M12 4a8 8 0 1 0 0 16a8 8 0 0 0 0-16M2 12C2 6.477 6.477 2 12 2s10 4.477 10 10s-4.477 10-10 10S2 17.523 2 12"/><path d="M12 10a1 1 0 0 1 1 1v6a1 1 0 1 1-2 0v-6a1 1 0 0 1 1-1m1.5-2.5a1.5 1.5 0 1 1-3 0a1.5 1.5 0 0 1 3 0"/></g></svg>`,
@@ -21,7 +23,7 @@ const alertIcons: Record<string, string> = {
 </script>
 
 <template>
-  <div v-if="visible" :class="alertVariant({ color: props.type })">
+  <div v-if="visible" :class="base()">
     <!-- Icon -->
     <span v-html="alertIcons[props.type]" class="mr-2"></span>
 
@@ -31,11 +33,6 @@ const alertIcons: Record<string, string> = {
     </div>
 
     <!-- Close Button -->
-    <button
-      class="absolute top-1.5 right-3 bg-transparent border-none text-2xl cursor-pointer"
-      @click="emit('close')"
-    >
-      ×
-    </button>
+    <button :class="buttonX()" @click="emit('close')">×</button>
   </div>
 </template>

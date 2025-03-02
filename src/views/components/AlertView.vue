@@ -94,7 +94,7 @@ const showAlert = ref(true)
     <div class="mt-6 mx-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-gmail">
       <div class="mt-4 flex flex-col flex-wrap gap-4">
         <Alert
-          type="info"
+          type="success"
           title="Lorem!"
           message="Lorem ipsum dolor sit amet consectetur, adipisicing elit. Quos cumque, quae ipsum totam cum id placeat inventore nisi porro eos mollitia praesentium aperiam eligendi vitae vel? Quia temporibus fuga dolore!"
           :visible="showAlert"

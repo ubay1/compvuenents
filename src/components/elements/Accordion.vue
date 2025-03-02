@@ -1,6 +1,7 @@
 <!-- eslint-disable @typescript-eslint/no-explicit-any -->
 <script setup lang="ts">
 import { ref, defineProps } from 'vue'
+import { accordionVariant } from '@/utils/tw-variants/components/accordion'
 
 interface AccordionItem {
   title: string
@@ -50,12 +51,11 @@ const onLeave = (el: any) => {
     >
       <button
         @click="toggleAccordion(index)"
-        :class="[
-          'w-full py-4 px-0 text-left flex justify-between items-center focus:outline-none',
-          {
-            '!items-start': item.description,
-          },
-        ]"
+        :class="
+          accordionVariant({
+            withDescription: !!item.description,
+          }).buttonToggle()
+        "
       >
         <div class="flex flex-col gap-1">
           <span class="font-medium text-gray-700 dark:text-gray-200">{{ item.title }}</span>
@@ -63,10 +63,7 @@ const onLeave = (el: any) => {
             item.description
           }}</span>
         </div>
-        <span
-          class="transform transition-transform duration-200"
-          :class="{ 'rotate-180': item.isOpen }"
-        >
+        <span :class="accordionVariant({ open: item.isOpen }).icon()">
           <svg
             class="w-5 h-5 text-gray-700 dark:text-gray-200"
             fill="none"

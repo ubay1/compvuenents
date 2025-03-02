@@ -4,7 +4,7 @@ import { RouterLink, useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const komponenDasar = [
+const components = [
   {
     name: 'Accordion',
     path: '/components/accordion',
@@ -38,11 +38,11 @@ onMounted(() => {
   >
     <div class="sticky top-6">
       <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-        Komponen Dasar
+        Komponen
       </h3>
       <div class="mt-2 space-y-1">
         <RouterLink
-          v-for="item in komponenDasar"
+          v-for="item in components"
           :key="item.path"
           :to="item.path"
           :class="[
