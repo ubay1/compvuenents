@@ -1,4 +1,8 @@
 <script setup lang="ts">
+import { cardVariant } from '@/utils/tw-variants/components/card'
+
+const { base, wrapperImg, img, titleClass, descClass, footer } = cardVariant()
+
 interface CardProps {
   title?: string
   description?: string
@@ -15,27 +19,19 @@ const props = withDefaults(defineProps<CardProps>(), {
 </script>
 
 <template>
-  <div
-    class="overflow-hidden rounded-lg transition-all duration-200 bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/30 hover:shadow-lg dark:hover:shadow-gray-900/40"
-  >
-    <div v-if="props.imageUrl" class="w-full h-48 overflow-hidden">
-      <img :src="props.imageUrl" :alt="props.imageAlt" class="object-cover w-full h-full" />
+  <div :class="base()">
+    <div v-if="props.imageUrl" :class="wrapperImg()">
+      <img :src="props.imageUrl" :alt="props.imageAlt" :class="img()" />
     </div>
     <div class="p-4">
-      <h3
-        v-if="props.title"
-        class="mt-0 mb-2 text-xl font-semibold text-gray-800 dark:text-gray-100"
-      >
+      <h3 v-if="props.title" :class="titleClass()">
         {{ props.title }}
       </h3>
-      <p
-        v-if="props.description"
-        class="mt-0 mb-4 text-gray-600 dark:text-gray-300 leading-relaxed"
-      >
+      <p v-if="props.description" :class="descClass()">
         {{ props.description }}
       </p>
       <slot></slot>
-      <div v-if="$slots.footer" class="mt-4 pt-4 border-t border-gray-100 dark:border-gray-700">
+      <div v-if="$slots.footer" :class="footer()">
         <slot name="footer"></slot>
       </div>
     </div>

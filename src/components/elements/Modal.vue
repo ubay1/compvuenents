@@ -1,5 +1,8 @@
 <script setup lang="ts">
 import { watch } from 'vue'
+import { modalVariant } from '@/utils/tw-variants/components/modal'
+
+const { backdrop, wrapperContent, cardContent, buttonX } = modalVariant()
 
 // Props untuk mengontrol modal dari luar
 const props = withDefaults(
@@ -39,35 +42,19 @@ const closeModal = () => {
 <template>
   <!-- Overlay -->
   <transition name="fade">
-    <div
-      v-if="isOpen"
-      :class="[
-        'fixed inset-0 bg-black/50 bg-opacity-10 z-40',
-        {
-          'backdrop-blur-lg': props.bgBlur,
-        },
-      ]"
-      @click="closeModal"
-    ></div>
+    <div v-if="isOpen" :class="backdrop({ withBgBlur: props.bgBlur })" @click="closeModal"></div>
   </transition>
 
   <!-- Modal -->
   <transition :name="props.transitionType">
-    <div v-if="props.isOpen" class="fixed inset-0 flex items-center justify-center z-50 py-8">
-      <div
-        class="relative bg-white dark:bg-gray-800 rounded-lg shadow-lg p-6 pt-4 w-[90%] md:w-1/2 max-h-[90vh] overflow-y-auto"
-      >
+    <div v-if="props.isOpen" :class="wrapperContent()">
+      <div :class="cardContent()">
         <div class="flex flex-col">
           <strong v-if="props.title" class="mr-1 mb-4">{{ props.title }}</strong>
           <p class="">{{ props.message }}</p>
         </div>
         <slot></slot>
-        <button
-          class="absolute top-2.5 right-3 bg-transparent border-none text-2xl cursor-pointer"
-          @click="emit('close')"
-        >
-          ×
-        </button>
+        <button :class="buttonX()" @click="emit('close')">×</button>
       </div>
     </div>
   </transition>
