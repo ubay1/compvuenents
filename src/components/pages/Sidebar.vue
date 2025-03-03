@@ -18,6 +18,10 @@ const components = [
     path: '/components/button',
   },
   {
+    name: 'Calendar',
+    path: '/components/calendar',
+  },
+  {
     name: 'Card',
     path: '/components/card',
   },

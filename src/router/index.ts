@@ -29,6 +29,11 @@ const router = createRouter({
       component: () => import('../views/components/ButtonView.vue'),
     },
     {
+      path: '/components/calendar',
+      name: 'components-calendar',
+      component: () => import('../views/components/CalendarView.vue'),
+    },
+    {
       path: '/components/card',
       name: 'components-card',
       component: () => import('../views/components/CardView.vue'),

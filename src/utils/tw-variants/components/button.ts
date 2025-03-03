@@ -1,4 +1,4 @@
-import { getTextColorFromRgb } from '@/utils/getTextColor'
+import { getTextColorFromRgb } from '@/utils/color'
 import { tv } from 'tailwind-variants'
 
 export const buttonVariant = tv({
