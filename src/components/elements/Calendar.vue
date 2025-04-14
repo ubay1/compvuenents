@@ -327,7 +327,7 @@ onMounted(() => {
 
 <template>
   <div
-    class="relative p-3 pt-2 border border-gray-100 rounded-md bg-white shadow-gmail dark:bg-gray-800 dark:shadow-none"
+    class="relative p-3 pt-2 border border-gray-100 rounded-md bg-white shadow-gmail dark:bg-gray-800 dark:shadow-none dark:border-gray-500"
     :style="{ width: width }"
   >
     <!-- Header dengan tombol navigasi bulan -->
@@ -412,7 +412,7 @@ onMounted(() => {
             <Icon icon="ion:chevron-forward" size="16" />
           </button>
         </div>
-        <div class="grid gap-2 gap-y-4 grid-cols-3 px-6 mt-4">
+        <div class="grid gap-2 gap-y-4 grid-cols-3 px-6 mt-2">
           <button
             v-for="(month, index) in months"
             :key="index"
@@ -445,7 +445,7 @@ onMounted(() => {
       class="absolute top-0 h-full left-0 z-10 bg-white rounded-md w-full flex flex-col justify-between dark:bg-gray-800"
     >
       <div class="flex flex-col">
-        <div class="flex px-4 justify-between items-center mb-2 mt-2">
+        <div class="flex px-4 justify-between items-center mb-2 mt-4">
           <button
             class="px-2 py-1 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed hover:bg-gray-200 dark:bg-transparent dark:text-gray-300 hover:dark:bg-gray-700"
             :disabled="!canPrevYear"
@@ -454,7 +454,9 @@ onMounted(() => {
           >
             <Icon icon="ion:chevron-back" size="16" />
           </button>
-          <span class="font-semibold">{{ yearRangeStart }} - {{ yearRangeStart + 9 }}</span>
+          <span class="font-semibold dark:text-gray-300"
+            >{{ yearRangeStart }} - {{ yearRangeStart + 9 }}</span
+          >
           <button
             class="px-2 py-1 border rounded disabled:opacity-50 cursor-pointer disabled:cursor-not-allowed hover:bg-gray-200 dark:bg-transparent dark:text-gray-300 hover:dark:bg-gray-700"
             :disabled="!canNextYear"
@@ -464,7 +466,7 @@ onMounted(() => {
             <Icon icon="ion:chevron-forward" size="16" />
           </button>
         </div>
-        <div class="grid grid-cols-2 gap-2 px-6 mt-4">
+        <div class="grid grid-cols-2 gap-2 px-6 mt-2">
           <button
             v-for="year in years"
             :key="year"

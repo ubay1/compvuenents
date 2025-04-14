@@ -94,7 +94,7 @@ const highlightCode = `<Card title="Card Title">
     <h3 class="text-2xl font-bold text-gray-900 dark:text-gray-300">Card</h3>
 
     <!-- Example -->
-    <div class="mt-6 mx-1 bg-white p-6 rounded-lg shadow-gmail">
+    <div class="mt-6 mx-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-gmail">
       <div class="mt-4 flex flex-col flex-wrap gap-4">
         <Card
           title="Card Title"

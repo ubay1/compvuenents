@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants'
 
 export const cardVariant = tv({
   slots: {
-    base: 'overflow-hidden rounded-lg transition-all duration-200 bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/30 hover:shadow-lg dark:hover:shadow-gray-900/40',
+    base: 'overflow-hidden rounded-lg transition-all duration-200 bg-white dark:bg-gray-800 shadow-md dark:shadow-gray-900/30 hover:shadow-lg dark:hover:shadow-gray-900/40 dark:border dark:border-gray-700',
     wrapperImg: 'w-full h-48 overflow-hidden',
     img: 'object-cover w-full h-full',
     titleClass: 'mt-0 mb-2 text-xl font-semibold text-gray-800 dark:text-gray-100',

@@ -2,7 +2,7 @@ import { tv } from 'tailwind-variants'
 
 export const accordionVariant = tv({
   slots: {
-    buttonToggle: 'w-full py-4 px-0 text-left flex justify-between focus:outline-none',
+    buttonToggle: 'w-full px-0 text-left flex justify-between bg-white dark:bg-gray-800 focus:outline-none',
     icon: 'transform transition-transform duration-200',
   },
   variants: {

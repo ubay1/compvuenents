@@ -8,7 +8,7 @@ const toggleTheme = useToggle(isDark)
 </script>
 
 <template>
-  <header class="shadow">
+  <header class="border-b border-gray-200 dark:border-b-gray-700">
     <div class="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8">
       <div class="flex justify-between h-16">
         <div class="flex gap-8">
@@ -43,7 +43,7 @@ const toggleTheme = useToggle(isDark)
             </RouterLink>
           </nav>
         </div>
-        <div class="hidden sm:ml-6 sm:flex sm:items-center">
+        <div class="ml-6 flex items-center">
           <!-- Theme Toggle Button -->
           <button
             @click="toggleTheme()"
