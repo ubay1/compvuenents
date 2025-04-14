@@ -1,8 +1,8 @@
 <script setup lang="ts">
 import { useDark, useToggle } from '@vueuse/core'
-import { RouterLink, useRoute } from 'vue-router'
+import { RouterLink } from 'vue-router'
 
-const route = useRoute()
+// const route = useRoute()
 const isDark = useDark()
 const toggleTheme = useToggle(isDark)
 </script>
@@ -13,42 +13,17 @@ const toggleTheme = useToggle(isDark)
       <div class="flex justify-between h-16">
         <div class="flex gap-8">
           <div class="flex-shrink-0 flex items-center">
-            <h1 class="text-xl font-bold text-green-600">CompVuenents</h1>
+            <h1 class="text-xl font-bold text-green-600">
+              <RouterLink to="/"> CompVuenents </RouterLink>
+            </h1>
           </div>
-          <nav class="hidden sm:ml-6 sm:flex sm:space-x-2">
-            <RouterLink
-              to="/"
-              :class="[
-                ' inline-flex items-center px-1 pt-1 text-sm',
-                {
-                  'border-green-600 text-green-600 font-semibold': route.path === '/',
-                  'border-transparent text-gray-500 dark:text-gray-300': route.path !== '/',
-                },
-              ]"
-            >
-              Home
-            </RouterLink>
-            <RouterLink
-              to="/playground"
-              :class="[
-                ' inline-flex items-center px-1 pt-1 text-sm',
-                {
-                  'border-green-600 text-green-600 font-semibold': route.path === '/playground',
-                  'border-transparent text-gray-500 dark:text-gray-300':
-                    route.path !== '/playground',
-                },
-              ]"
-            >
-              Playground
-            </RouterLink>
-          </nav>
         </div>
         <div class="ml-6 flex items-center">
           <!-- Theme Toggle Button -->
           <button
-            @click="toggleTheme()"
-            class="p-2 rounded-md bg-gray-100 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-200 dark:hover:bg-gray-600 transition-colors"
+            class="p-2 rounded-md dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
             :aria-label="isDark ? 'Switch to light mode' : 'Switch to dark mode'"
+            @click="toggleTheme()"
           >
             <!-- Sun icon (light mode) -->
             <svg
