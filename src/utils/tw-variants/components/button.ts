@@ -13,7 +13,8 @@ export const buttonVariant = tv({
       false: '',
     },
     size: {
-      sm: 'h-8 px-2 text-sm',
+      xs: 'h-8 px-2 text-[10px]',
+      sm: 'h-10 px-2 text-sm',
       md: 'h-12 px-4 text-base',
       lg: 'h-16 px-6 text-lg',
     },

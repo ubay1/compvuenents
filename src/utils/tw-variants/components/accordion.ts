@@ -16,10 +16,10 @@ export const accordionVariant = tv({
     },
     open: {
       true: {
-        icon: 'rotate-180',
+        icon: 'px-2 rotate-180',
       },
       false: {
-        icon: 'rotate-0',
+        icon: 'px-2 rotate-0',
       },
     },
   },

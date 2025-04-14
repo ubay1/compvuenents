@@ -5,7 +5,7 @@ import BasicTable, { type TableColumn } from '@/components/elements/table/Basic.
 import HighlightCode from '@/components/elements/HighlightCode.vue'
 
 const variantsButton: ButtonVariant[] = ['primary', 'secondary', 'danger', 'warning', 'info']
-const sizeButton: ButtonSize[] = ['sm', 'md', 'lg']
+const sizeButton: ButtonSize[] = ['xs', 'sm', 'md', 'lg']
 
 const columnsProps: TableColumn[] = [
   {

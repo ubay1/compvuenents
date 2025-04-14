@@ -44,11 +44,7 @@ const onLeave = (el: any) => {
 
 <template>
   <div class="w-full max-w-md mx-auto">
-    <div
-      v-for="(item, index) in items"
-      :key="index"
-      class="border-b border-gray-200 dark:border-gray-700"
-    >
+    <div v-for="(item, index) in items" :key="index" class="mt-2">
       <button
         @click="toggleAccordion(index)"
         :class="
@@ -58,10 +54,10 @@ const onLeave = (el: any) => {
         "
       >
         <div class="flex flex-col gap-1">
-          <span class="font-medium text-gray-700 dark:text-gray-200">{{ item.title }}</span>
-          <span v-if="item.description" class="text-xs text-gray-400 dark:text-gry-700">{{
-            item.description
-          }}</span>
+          <span class="font-medium text-gray-700 dark:text-gray-200 px-2"> {{ item.title }} </span>
+          <span v-if="item.description" class="text-xs text-gray-400 px-2 dark:text-gry-700">
+            {{ item.description }}
+          </span>
         </div>
         <span :class="accordionVariant({ open: item.isOpen }).icon()">
           <svg

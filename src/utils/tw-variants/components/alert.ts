@@ -3,7 +3,7 @@ import { tv } from 'tailwind-variants'
 export const alertVariant = tv({
   slots: {
     base: 'p-4 mb-4 rounded-lg relative border flex items-start',
-    buttonX: 'absolute top-1.5 right-3 bg-transparent border-none text-2xl cursor-pointer',
+    buttonX: 'absolute top-1 p-0 right-3 bg-transparent border-none text-2xl cursor-pointer',
   },
   variants: {
     color: {
