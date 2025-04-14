@@ -1,38 +1,12 @@
 <script setup lang="ts">
+import components from '@/constants/menuSidebar'
 import { onMounted } from 'vue'
 import { RouterLink, useRoute } from 'vue-router'
 
 const route = useRoute()
 
-const components = [
-  {
-    name: 'Accordion',
-    path: '/components/accordion',
-  },
-  {
-    name: 'Alert',
-    path: '/components/alert',
-  },
-  {
-    name: 'Button',
-    path: '/components/button',
-  },
-  {
-    name: 'Calendar',
-    path: '/components/calendar',
-  },
-  {
-    name: 'Card',
-    path: '/components/card',
-  },
-  {
-    name: 'Modal',
-    path: '/components/modal',
-  },
-]
-
 onMounted(() => {
-  console.log(route)
+  // console.log(route)
 })
 </script>
 
