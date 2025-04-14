@@ -1,13 +1,13 @@
 <script setup lang="ts">
 import components from '@/constants/menuSidebar'
-import { useRoute, useRouter } from 'vue-router'
+import { onMounted } from 'vue'
+import { RouterLink, useRoute } from 'vue-router'
 
 const route = useRoute()
-const router = useRouter()
 
-const goto = (path: string) => {
-  router.push(path)
-}
+onMounted(() => {
+  // console.log(route)
+})
 </script>
 
 <template>
@@ -19,9 +19,10 @@ const goto = (path: string) => {
         Komponen
       </h3>
       <div class="mt-2 space-y-1">
-        <button
+        <RouterLink
           v-for="item in components"
           :key="item.path"
+          :to="item.path"
           :class="[
             'px-2 py-1 rounded block',
             {
@@ -30,10 +31,9 @@ const goto = (path: string) => {
                 route.path !== item.path,
             },
           ]"
-          @click="goto(item.path)"
         >
           {{ item.name }}
-        </button>
+        </RouterLink>
       </div>
     </div>
   </aside>

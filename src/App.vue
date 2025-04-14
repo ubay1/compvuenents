@@ -1,21 +1,27 @@
 <!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <script setup lang="ts">
+import { onMounted, onUnmounted, ref } from 'vue'
 import { useDark } from '@vueuse/core'
-import { RouterLink, RouterView, useRoute } from 'vue-router'
+import { RouterView, useRoute, useRouter } from 'vue-router'
+import { Icon } from '@iconify/vue/dist/iconify.js'
 import Navbar from '@/components/pages/Navbar.vue'
 import Sidebar from '@/components/pages/Sidebar.vue'
 import { appearance } from '@/utils/tw-variants/components/appearance'
-import { Icon } from '@iconify/vue/dist/iconify.js'
-import { ref } from 'vue'
 import components from './constants/menuSidebar'
 import { modalVariant } from './utils/tw-variants/components/modal'
 
 const isDark = useDark()
 const route = useRoute()
+const router = useRouter()
 
 const { buttonX } = modalVariant()
 
 const showSidebarSmScreen = ref(false)
+
+const goto = (path: string) => {
+  router.push(path)
+  showSidebarSmScreen.value = false
+}
 </script>
 
 <template>
@@ -26,7 +32,7 @@ const showSidebarSmScreen = ref(false)
     <!-- menu sidebar small screen -->
     <section>
       <button
-        class="flex items-center gap-2 md:hidden sm:mx-6 p-2 mx-4 my-2 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
+        class="mt-4 flex items-center gap-2 md:hidden sm:mx-6 p-2 mx-4 my-2 dark:bg-gray-700 text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-600 transition-colors"
         aria-label="Menu sidebar"
         @click="showSidebarSmScreen = !showSidebarSmScreen"
       >
@@ -48,21 +54,21 @@ const showSidebarSmScreen = ref(false)
         <div
           class="h-screen fixed top-0 z-30 left-0 w-full sm:w-[250px] bg-white dark:bg-gray-800 border-r dark:border-r-gray-700 space-y-1 p-4 py-8"
         >
-          <RouterLink
+          <button
             v-for="item in components"
             :key="item.path"
-            :to="item.path"
             :class="[
-              'px-2 py-1 rounded block',
+              'px-2 py-1 rounded block bg-transparent p-0 border-0',
               {
                 'text-green-600 font-medium': route.path === item.path,
                 'text-gray-400 dark:text-gray-500 hover:text-green-600 hover:bg-gray-100 dark:hover:bg-gray-800':
                   route.path !== item.path,
               },
             ]"
+            @click="goto(item.path)"
           >
             {{ item.name }}
-          </RouterLink>
+          </button>
         </div>
       </div>
     </section>

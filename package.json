@@ -21,6 +21,7 @@
     "@vueuse/core": "^12.7.0",
     "dayjs": "^1.11.13",
     "highlight.js": "^11.11.1",
+    "mitt": "^3.0.1",
     "pinia": "^3.0.1",
     "tailwind-variants": "^0.3.1",
     "tailwindcss": "^4.0.9",
