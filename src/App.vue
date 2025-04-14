@@ -8,9 +8,12 @@ import { appearance } from '@/utils/tw-variants/components/appearance'
 import { Icon } from '@iconify/vue/dist/iconify.js'
 import { ref } from 'vue'
 import components from './constants/menuSidebar'
+import { modalVariant } from './utils/tw-variants/components/modal'
 
 const isDark = useDark()
 const route = useRoute()
+
+const { buttonX } = modalVariant()
 
 const showSidebarSmScreen = ref(false)
 </script>
@@ -36,8 +39,14 @@ const showSidebarSmScreen = ref(false)
           class="fixed z-20 top-0 left-0 w-screen h-screen bg-gray-800/50 backdrop-blur-lg"
           @click="showSidebarSmScreen = !showSidebarSmScreen"
         ></div>
+        <button
+          :class="[buttonX(), '!z-[1000] sm:hidden']"
+          @click="showSidebarSmScreen = !showSidebarSmScreen"
+        >
+          ×
+        </button>
         <div
-          class="h-screen fixed top-0 z-30 left-0 w-full sm:w-[250px] bg-white dark:bg-gray-800 border-r dark:border-r-gray-700 space-y-1 p-4"
+          class="h-screen fixed top-0 z-30 left-0 w-full sm:w-[250px] bg-white dark:bg-gray-800 border-r dark:border-r-gray-700 space-y-1 p-4 py-8"
         >
           <RouterLink
             v-for="item in components"
