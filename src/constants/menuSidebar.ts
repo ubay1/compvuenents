@@ -23,6 +23,10 @@ const components = [
     name: 'Modal',
     path: '/components/modal',
   },
+  {
+    name: 'Checkbox',
+    path: '/components/checkbox',
+  },
 ]
 
 export default components

@@ -43,6 +43,11 @@ const router = createRouter({
       name: 'components-modal',
       component: () => import('../views/components/ModalView.vue'),
     },
+    {
+      path: '/components/checkbox',
+      name: 'components-checkbox',
+      component: () => import('../views/components/CheckboxView.vue'),
+    },
   ],
 })
 
