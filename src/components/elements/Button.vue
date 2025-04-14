@@ -4,7 +4,7 @@ import { buttonVariant } from '@/utils/tw-variants/components/button'
 
 type ButtonType = 'fill' | 'outline'
 export type ButtonVariant = 'primary' | 'secondary' | 'danger' | 'warning' | 'info'
-export type ButtonSize = 'sm' | 'md' | 'lg'
+export type ButtonSize = 'xs' | 'sm' | 'md' | 'lg'
 
 interface Props {
   type?: ButtonType
