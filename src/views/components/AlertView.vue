@@ -20,11 +20,11 @@ const columnsProps: TableColumn[] = [
   },
   {
     key: 'default',
-    label: 'Default',
+    label: 'Default Value',
   },
   {
     key: 'value',
-    label: 'List Value',
+    label: 'Value',
   },
 ]
 const dataProps = [
