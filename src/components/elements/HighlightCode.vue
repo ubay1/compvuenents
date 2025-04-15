@@ -45,12 +45,12 @@ watch(
 
 <template>
   <div class="overflow-hidden relative rounded-lg shadow-md my-4">
-    <div class="flex justify-start items-center bg-[#282c34] py-2 px-4 text-gray-300">
+    <div class="flex justify-start items-center bg-[#1e2938] py-2 px-4 text-gray-300">
       <span class="text-xs uppercase">{{ language }}</span>
       <button
         @click="copyCode"
         class="absolute top-2 right-2 text-xs py-1 px-2 rounded bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
-        :class="{ 'bg-green-500 text-gray-900': copied }"
+        :class="{ 'bg-green-800 text-white hover:bg-green-800': copied }"
       >
         {{ copied ? 'Tersalin!' : 'Salin' }}
       </button>

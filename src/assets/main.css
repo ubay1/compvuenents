@@ -27,3 +27,7 @@
     @apply bg-white p-2 rounded-lg border-1 border-solid border-gray-300 text-gray-600 cursor-pointer hover:bg-gray-200 disabled:opacity-25 disabled:cursor-not-allowed;
   }
 }
+
+.hljs {
+  background-color: #1e2938 !important;
+}
