@@ -20,12 +20,16 @@ const components = [
     path: '/components/card',
   },
   {
-    name: 'Modal',
-    path: '/components/modal',
-  },
-  {
     name: 'Checkbox',
     path: '/components/checkbox',
+  },
+  {
+    name: 'Chip',
+    path: '/components/chip',
+  },
+  {
+    name: 'Modal',
+    path: '/components/modal',
   },
 ]
 

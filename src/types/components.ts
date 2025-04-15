@@ -12,7 +12,6 @@ export interface IPropsCalendar {
   initialValue?: string
   disabledMinDate?: string // Format: YYYY-MM-DD
   disabledMaxDate: string // Format: YYYY-MM-DD
-  maxYear?: number
 }
 
 export interface IPropsDatePicker {

@@ -48,6 +48,11 @@ const router = createRouter({
       name: 'components-checkbox',
       component: () => import('../views/components/CheckboxView.vue'),
     },
+    {
+      path: '/components/chip',
+      name: 'components-chip',
+      component: () => import('../views/components/ChipView.vue'),
+    },
   ],
 })
 
