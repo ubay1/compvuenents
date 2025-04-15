@@ -28,6 +28,10 @@ const components = [
     path: '/components/chip',
   },
   {
+    name: 'Datepicker',
+    path: '/components/datepicker',
+  },
+  {
     name: 'Modal',
     path: '/components/modal',
   },

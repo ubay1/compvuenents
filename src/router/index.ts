@@ -53,6 +53,11 @@ const router = createRouter({
       name: 'components-chip',
       component: () => import('../views/components/ChipView.vue'),
     },
+    {
+      path: '/components/datepicker',
+      name: 'components-datepicker',
+      component: () => import('../views/components/DatepickerView.vue'),
+    },
   ],
 })
 
