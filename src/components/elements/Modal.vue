@@ -4,7 +4,6 @@ import { modalVariant } from '@/utils/tw-variants/components/modal'
 
 const { backdrop, wrapperContent, cardContent, buttonX } = modalVariant()
 
-// Props untuk mengontrol modal dari luar
 const props = withDefaults(
   defineProps<{
     isOpen: boolean
@@ -19,7 +18,6 @@ const props = withDefaults(
   },
 )
 
-// Emit untuk memberi tahu parent ketika modal ditutup
 const emit = defineEmits(['close'])
 
 watch(
@@ -33,16 +31,13 @@ watch(
   },
 )
 
-// Fungsi untuk menutup modal
-const closeModal = () => {
-  emit('close')
-}
+const closeModal = () => emit('close')
 </script>
 
 <template>
   <!-- Overlay -->
   <transition name="fade">
-    <div v-if="isOpen" :class="backdrop({ withBgBlur: props.bgBlur })" @click="closeModal"></div>
+    <div v-if="isOpen" :class="backdrop({ withBgBlur: props.bgBlur })" @click="closeModal()"></div>
   </transition>
 
   <!-- Modal -->
@@ -54,7 +49,7 @@ const closeModal = () => {
           <p class="">{{ props.message }}</p>
         </div>
         <slot></slot>
-        <button :class="buttonX()" @click="emit('close')">×</button>
+        <button :class="buttonX()" @click="closeModal()">×</button>
       </div>
     </div>
   </transition>

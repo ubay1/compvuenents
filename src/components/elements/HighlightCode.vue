@@ -1,7 +1,7 @@
 <script setup lang="ts">
 import { ref, onMounted, watch } from 'vue'
 import hljs from 'highlight.js'
-import 'highlight.js/styles/atom-one-dark-reasonable.css' // Anda bisa memilih style yang berbeda
+import 'highlight.js/styles/atom-one-dark-reasonable.css'
 
 const props = withDefaults(defineProps<{ language: string }>(), {
   language: 'javascript',

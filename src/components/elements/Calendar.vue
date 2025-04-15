@@ -1,10 +1,5 @@
 <!-- eslint-disable vue/return-in-computed-property -->
-<!-- eslint-disable security/detect-object-injection -->
-<!-- eslint-disable no-alert -->
-<!-- eslint-disable @typescript-eslint/no-unused-vars -->
-<!-- eslint-disable sonarjs/no-duplicate-string -->
-<!-- eslint-disable sonarjs/prefer-single-boolean-return -->
-<!-- eslint-disable @typescript-eslint/no-shadow -->
+
 <script setup lang="ts">
 import { ref, computed, onMounted } from 'vue'
 import dayjs from 'dayjs'
@@ -76,13 +71,6 @@ const isSelectedDate = (date: number) => {
   )
 }
 
-const maxYear = computed(() => {
-  if (disabledMaxDate) {
-    return dayjs(disabledMaxDate).year()
-  }
-  return CURRENT_YEAR
-})
-
 const years = computed(() =>
   Array.from({ length: 10 }, (_, i) => yearRangeStart.value + i).filter(
     (year) => year >= MIN_YEAR && year <= CURRENT_YEAR,
@@ -114,9 +102,6 @@ const prevMonthInList = () => {
   }
 }
 const canNextMonth = computed(() => {
-  // console.log(`${selectedMonth.value} - ${selectedMonthIndex.value}`)
-  // console.log(dayjs(disabledMaxDate).month() + 1)
-
   if (selectedYear.value === dayjs(disabledMaxDate).year()) {
     if (Number(selectedMonthIndex.value) < dayjs(disabledMaxDate).month()) {
       return true

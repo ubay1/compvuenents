@@ -18,8 +18,8 @@ const toggle = () => {
 
 // Style dinamis berdasarkan warna hex
 const checkboxStyle = computed(() => ({
-  backgroundColor: props.modelValue ? props.color || '#3b82f6' : 'transparent', // Default: biru Tailwind (#3b82f6)
-  borderColor: props.modelValue ? props.color || '#3b82f6' : '#d1d5db', // Default border gray-300
+  backgroundColor: props.modelValue ? props.color || '#3b82f6' : 'transparent',
+  borderColor: props.modelValue ? props.color || '#3b82f6' : '#d1d5db',
 }))
 </script>
 
