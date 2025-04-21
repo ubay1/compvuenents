@@ -6,12 +6,10 @@ import { useDark, useWindowSize } from '@vueuse/core'
 import { autoUpdate, flip, offset, shift, useFloating } from '@floating-ui/vue'
 import type { IPropsCalendar, IPropsDatePicker } from '@/types/components'
 import Calendar from './Calendar.vue'
-import { computed, onMounted, onUnmounted, ref, watch } from 'vue'
+import { ref, computed, watch, onMounted, onUnmounted } from 'vue'
 import { Icon } from '@iconify/vue/dist/iconify.js'
 
 const { width: widthWindow } = useWindowSize()
-const isDark = useDark()
-
 const emit = defineEmits(['change', 'showhide'])
 const {
   disabledMinDate,
@@ -20,10 +18,11 @@ const {
   disabledOnlySunday,
   disabledOnlySaturday,
   disabledDates,
+  disabled,
   theme,
   initialValue,
+  withRange,
   // props datepicker
-  disabled,
   showIconCalendar = true,
   colorIconCalendar = '#556167',
   prependIcon = false,
@@ -34,22 +33,34 @@ const {
   isFloating,
   isRequired,
   isFlipList,
-  positionCalendar = 'bottom-start',
+  positionCalendar,
 } = defineProps<IPropsCalendar & IPropsDatePicker>()
 
-const selectedDate = ref('') // Menyimpan tanggal terpilih
+const isDark = useDark()
+
+const selectedDate = ref<string>('') // Menyimpan tanggal terpilih
 const showCalendar = ref(false) // Kontrol visibilitas dropdown kalender
 const inputRef = ref(null) // Untuk menangkap klik di luar
 // Element referensi untuk posisi floating
 const referenceEl = ref(null)
 const calendarRef = ref(null)
 
+const BOTTOM_MARGIN = 100 // Ganti ini sesuai kebutuhan
+
+const getPlacement = () => {
+  if (!referenceEl.value) return 'bottom-start'
+
+  const rect = (referenceEl.value as any).getBoundingClientRect()
+  const distanceToBottom = window.innerHeight - rect.bottom
+
+  return distanceToBottom < BOTTOM_MARGIN ? 'top-start' : 'bottom-start'
+}
 const getFlipList = computed(() =>
   isFlipList ? [flip(), shift(), offset(8)] : [shift(), offset(8)],
 )
 // Hitung posisi floating
 const { floatingStyles } = useFloating(referenceEl, calendarRef, {
-  placement: positionCalendar,
+  placement: positionCalendar, // Gunakan hasil dari fungsi di atas
   middleware: getFlipList.value,
   whileElementsMounted: autoUpdate,
 })
@@ -64,10 +75,16 @@ watch(
 )
 
 // Saat user memilih tanggal di kalender
-const handleDateSelect = (date: string) => {
-  selectedDate.value = date
+const handleDateSelect = (date: any) => {
+  if (withRange) {
+    selectedDate.value = `${dayjs(date.startDate).format(formatShowDate)} - ${dayjs(
+      date.endDate,
+    ).format(formatShowDate)}`
+  } else {
+    selectedDate.value = date
+  }
   showCalendar.value = false
-  emit('change', date)
+  emit('change', selectedDate.value)
   emit('showhide', showCalendar.value)
 }
 
@@ -88,6 +105,38 @@ const handleClickOutside = (event: MouseEvent) => {
     showCalendar.value = false
   }
 }
+
+const dateRange = () => {
+  const [startDateStr, endDateStr] = selectedDate.value.split(' - ')
+
+  const formatDate = (dateStr: string) => {
+    const parts = dateStr.replace(/\//g, '-').split('-')
+    return {
+      fullDate: `${parts[2]}-${parts[1]}-${parts[0]}`,
+      onlyDate: parts[0],
+    }
+  }
+
+  const { fullDate: startDate, onlyDate: startOnlyDate } = formatDate(startDateStr)
+  const { fullDate: endDate, onlyDate: endOnlyDate } = formatDate(endDateStr)
+
+  return {
+    startDate,
+    startOnlyDate,
+    endDate,
+    endOnlyDate,
+  }
+}
+
+const getLabel = computed(() => {
+  if (selectedDate.value && !withRange) {
+    return dayjs(selectedDate.value).format(formatShowDate)
+  }
+  if (selectedDate.value && withRange) {
+    return selectedDate.value
+  }
+  return placeholder
+})
 
 onMounted(() => {
   document.addEventListener('mousedown', handleClickOutside)
@@ -125,8 +174,9 @@ onUnmounted(() => {
               'text-gray-500 text-[16px]': disabled,
             },
           ]"
-          >{{ selectedDate ? dayjs(selectedDate).format(formatShowDate) : placeholder }}</span
         >
+          {{ getLabel }}
+        </span>
         <Icon
           v-if="showIconCalendar"
           icon="uil:calendar"
@@ -146,7 +196,9 @@ onUnmounted(() => {
     >
       <Calendar
         :theme="theme"
-        :initial-value="selectedDate"
+        :initial-value="
+          !withRange && selectedDate ? selectedDate : withRange && selectedDate ? dateRange() : ''
+        "
         :default-view="defaultView"
         :disabled-weekend="disabledWeekend"
         :disabled-only-sunday="disabledOnlySunday"
@@ -154,6 +206,7 @@ onUnmounted(() => {
         :disabled-dates="disabledDates"
         :disabled-min-date="disabledMinDate"
         :disabled-max-date="disabledMaxDate"
+        :with-range="withRange"
         @on-selected-date="handleDateSelect"
       />
     </div>

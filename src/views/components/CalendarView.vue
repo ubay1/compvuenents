@@ -118,6 +118,13 @@ const dataProps = [
     default: '',
     value: '[ { date: YYYY-MM-DD, value: string } ] ',
   },
+  {
+    name: 'with-range',
+    type: 'Boolean',
+    opsional: 'true',
+    default: '',
+    value: 'true | false',
+  },
 ]
 
 const columnsEvents: TableColumn[] = [
@@ -133,7 +140,7 @@ const columnsEvents: TableColumn[] = [
 const dataEvents = [
   {
     name: 'onSelectedDate',
-    description: 'Event yang akan dijalankan ketika tanggal pada kalender diklik.',
+    description: 'Event that will be triggered when a date is clicked on the calendar.',
   },
 ]
 
@@ -159,6 +166,7 @@ const highlightCode = `<Calendar
     { date: '2025-02-06', value: '20' },
     { date: '2025-02-10', value: '35' },
   ]"
+  :with-range="false"
 />`
 </script>
 
@@ -169,6 +177,7 @@ const highlightCode = `<Calendar
     <!-- Example -->
     <div class="mt-6 mx-1 bg-white dark:bg-gray-800 p-6 rounded-lg shadow-gmail">
       <div class="mt-4 flex flex-col flex-wrap gap-4">
+        <h3>Calender without props with-range</h3>
         <Calendar
           width="320px"
           theme="#00a63e"
@@ -191,13 +200,40 @@ const highlightCode = `<Calendar
             { date: '2025-02-06', value: '20' },
             { date: '2025-02-10', value: '35' },
           ]"
+          :with-range="false"
+        />
+
+        <h3>Calender with props with-range</h3>
+        <Calendar
+          width="320px"
+          theme="#00a63e"
+          dot-color="#00a63e"
+          :disabled-weekend="false"
+          :disabled-only-sunday="true"
+          :disabled-only-saturday="false"
+          :initial-value="dayjs().format('YYYY-MM-DD')"
+          :default-view="dayjs().format('YYYY-MM-DD')"
+          :dot-active="true"
+          :disabled-min-date="dayjs().subtract(1, 'month').format('YYYY-MM-DD')"
+          :disabled-max-date="dayjs().add(30, 'days').format('YYYY-MM-DD')"
+          :disabled-dates="[{ date: '2025-03-31', label: 'Idul Fitri 1446 H' }]"
+          :value-for-date="[
+            { date: '2025-02-01', value: '20' },
+            { date: '2025-02-02', value: '20' },
+            { date: '2025-02-03', value: '20' },
+            { date: '2025-02-04', value: '20' },
+            { date: '2025-02-05', value: '20' },
+            { date: '2025-02-06', value: '20' },
+            { date: '2025-02-10', value: '35' },
+          ]"
+          :with-range="true"
         />
       </div>
     </div>
 
     <!-- Usage -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Usage</h4>
       <HighlightCode language="">
         {{ highlightCode }}
       </HighlightCode>

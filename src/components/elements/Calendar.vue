@@ -1,3 +1,4 @@
+<!-- eslint-disable @typescript-eslint/no-unused-vars -->
 <!-- eslint-disable vue/return-in-computed-property -->
 
 <script setup lang="ts">
@@ -7,6 +8,7 @@ import 'dayjs/locale/id'
 import { Icon } from '@iconify/vue'
 import type { IPropsCalendar } from '@/types/components'
 import { checkDataIsNotEmpty } from '@/utils/validations'
+import { removeZeroInNumber } from '@/utils/transform'
 
 dayjs.locale('id')
 
@@ -24,6 +26,7 @@ const {
   initialValue,
   disabledMinDate,
   disabledMaxDate,
+  withRange,
 } = defineProps<IPropsCalendar>()
 
 const emit = defineEmits(['onSelectedDate'])
@@ -33,15 +36,51 @@ const CURRENT_YEAR = dayjs().year() // Tahun sekarang
 
 const isSelectingMonth = ref(false)
 const isSelectingYear = ref(false)
-// const selectedDate = ref<string | null>(initialDate().format('YYYY-MM-DD'))
+
+// initial value untuk date range
+const rangeStart = ref<string | null>(null)
+const rangeEnd = ref<string | null>(null)
+const rangeStartMonth = ref<number>(0)
+const rangeEndMonth = ref<number>(0)
+const fullDateRangeStart = ref<string | null>(null)
+const fullDateRangeEnd = ref<string | null>(null)
+const withInitValue = ref(false)
+const totalSelectedDatesStart = ref(0)
+const totalSelectedDatesEnd = ref(0)
+
+// initial value untuk date range
 // dibuat null, agar diawal tidak ada tanggal yang dipilih
 const selectedDate = ref<string | null>(null)
-// Ambil nilai dari defaultView atau fallback ke hari ini
+
+/**
+ * @description fungsi untuk melakukan pengecekan initail value & props withRange.
+ * jika props withRange true, maka akan menampilkan range date.
+ * jika props withRange false, maka akan menampilkan single date.
+ * jika tidak ada props withRange, maka akan menampilkan single date.
+ * jika tidak ada props initialValue, maka akan menampilkan tanggal sekarang.
+ * return ditiap" kondisi untuk menampilkan kalender sesuai tanggal,bulan,tahun dari initialValue
+ */
 const initialDate = () => {
-  // console.log('init value = ', initialValue)
-  if (initialValue) {
-    selectedDate.value = initialValue
-    return dayjs(initialValue)
+  if (initialValue && !withRange) {
+    selectedDate.value = initialValue as string
+
+    return dayjs(initialValue as string)
+  }
+  if (initialValue && withRange) {
+    interface initValueObject {
+      startDate: string
+      startOnlyDate: string
+      endDate: string
+      endOnlyDate: string
+    }
+
+    rangeStart.value = (initialValue as unknown as initValueObject).startOnlyDate
+    rangeEnd.value = (initialValue as unknown as initValueObject).endOnlyDate
+    fullDateRangeStart.value = (initialValue as unknown as initValueObject).startDate
+    fullDateRangeEnd.value = (initialValue as unknown as initValueObject).endDate
+    withInitValue.value = true
+    // totalSelectedDates.value += 1
+    return dayjs((initialValue as unknown as initValueObject).startDate)
   }
   if (defaultView) {
     // selectedDate.value = defaultView
@@ -300,6 +339,106 @@ const nextMonthInList = () => {
   }
 }
 
+/**
+ * @description 3 fungsi ini untuk melakukan pengecekan apakah tanggal yang dipilih berada diantara tanggal awal dan tanggal akhir.
+ * @param date tanggal yang dipilih
+ * @returns true jika tanggal berada diantara tanggal awal dan tanggal akhir
+ * @returns false jika tanggal tidak berada diantara tanggal awal dan tanggal akhir
+ */
+const isInRange = (date: string) => {
+  if (!rangeStart.value || !rangeEnd.value) return false
+  return (
+    dayjs(`${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`).isAfter(
+      fullDateRangeStart.value,
+    ) &&
+    dayjs(`${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`).isBefore(
+      fullDateRangeEnd.value,
+    )
+  )
+}
+const isRangeStart = (date: string) => {
+  if (!rangeStart.value) return false
+  if (withInitValue.value && totalSelectedDatesStart.value === 0) {
+    return (
+      dayjs(`${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`).format(
+        'YYYY-MM-DD',
+      ) === fullDateRangeStart.value
+    )
+  }
+  if (!withInitValue.value || (withInitValue.value && totalSelectedDatesStart.value > 0)) {
+    return date === rangeStart.value && rangeStartMonth.value === selectedMonthIndex.value + 1
+  }
+}
+const isRangeEnd = (date: string) => {
+  if (!rangeEnd.value) return false
+  if (withInitValue.value && totalSelectedDatesEnd.value === 0) {
+    return (
+      dayjs(`${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`).format(
+        'YYYY-MM-DD',
+      ) === fullDateRangeEnd.value
+    )
+  }
+  if (!withInitValue.value || (withInitValue.value && totalSelectedDatesEnd.value > 0)) {
+    return date === rangeEnd.value && rangeEndMonth.value === selectedMonthIndex.value + 1
+  }
+}
+
+/**
+ * @description fungsi ini handle tanggal yang dipilih.
+ * @description jika rangeStart telah dipilih, lalu user pilih rangeEnd lebih kecil dari rangeStart maka rangeStart akan diganti dengan rangeEnd.
+ * @param date tanggal yang dipilih
+ *
+ * untuk withRange
+ * @returns true jika tanggal berada diantara tanggal awal dan tanggal akhir
+ * @returns false jika tanggal tidak berada diantara tanggal awal dan tanggal akhir
+ */
+const handleDateClick = (date: string) => {
+  if (withRange) {
+    if (!rangeStart.value || (rangeStart.value && rangeEnd.value)) {
+      rangeStart.value = date
+      rangeEnd.value = null
+      rangeStartMonth.value = selectedMonthIndex.value + 1
+      totalSelectedDatesStart.value += 1
+      fullDateRangeStart.value = dayjs(
+        `${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`,
+      ).format('YYYY-MM-DD')
+    } else if (!rangeEnd.value) {
+      const start = removeZeroInNumber(rangeStart.value)
+      const end = removeZeroInNumber(date)
+
+      if (Number(end) < Number(start)) {
+        rangeStart.value = date
+        rangeEnd.value = null
+        fullDateRangeStart.value = dayjs(
+          `${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`,
+        ).format('YYYY-MM-DD')
+      } else {
+        fullDateRangeEnd.value = dayjs(
+          `${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`,
+        ).format('YYYY-MM-DD')
+        rangeEnd.value = date
+        rangeEndMonth.value = selectedMonthIndex.value + 1
+
+        totalSelectedDatesEnd.value += 1
+
+        emit('onSelectedDate', {
+          startDate: dayjs(
+            `${selectedYear.value}-${rangeStartMonth.value}-${rangeStart.value}`,
+          ).format('YYYY-MM-DD'),
+          endDate: dayjs(`${selectedYear.value}-${rangeEndMonth.value}-${rangeEnd.value}`).format(
+            'YYYY-MM-DD',
+          ),
+        })
+      }
+    }
+  } else if (!isDisabledDate(Number(date))) {
+    selectedDate.value = dayjs(
+      `${selectedYear.value}-${selectedMonthIndex.value + 1}-${date}`,
+    ).format('YYYY-MM-DD')
+    emit('onSelectedDate', selectedDate.value)
+  }
+}
+
 onMounted(() => {
   if (checkDataIsNotEmpty(defaultView)) {
     const defaultDate = dayjs(defaultView)
@@ -480,11 +619,11 @@ onMounted(() => {
     <!-- Kalender -->
     <div>
       <div
-        class="grid grid-cols-7 gap-1 text-center text-[12px] text-gray-300 font-400 dark:text-gray-300"
+        class="grid grid-cols-7 gap-0 text-center text-[12px] text-gray-300 font-400 dark:text-gray-300"
       >
         <span v-for="day in days" :key="day">{{ day }}</span>
       </div>
-      <div class="grid grid-cols-7 gap-1 mt-2">
+      <div class="grid grid-cols-7 gap-0 mt-2">
         <span
           v-for="date in previousMonthDays"
           :key="`prev-${date}`"
@@ -497,22 +636,31 @@ onMounted(() => {
           v-for="date in daysInMonth"
           :key="date"
           :class="[
-            'relative h-auto text-[12px] border rounded p-2 flex flex-col justify-center items-center cursor-pointer disabled:cursor-not-allowed dark:bg-transparent dark:text-gray-300',
+            'relative h-auto text-[12px] border rounded-none p-2 flex flex-col justify-center items-center cursor-pointer disabled:cursor-not-allowed dark:bg-transparent dark:text-gray-300',
             {
               // theme: isSelectedDate(date),
-              'bg-theme': isSelectedDate(date), // Jika dipilih, gunakan background theme
-              'text-theme font-bold': isToday(date) && !isSelectedDate(date), // Jika hari ini, gunakan warna theme
-              'hover:bg-gray-100 hover:dark:bg-gray-700': !isSelectedDate(date),
-              'text-gray-300 !opacity-100 dark:text-gray-600':
-                !isPastOrToday(date) || isDisabledDate(date),
+              'bg-theme !rounded': !withRange && isSelectedDate(date), // Jika dipilih, gunakan background theme
+              'text-theme font-bold': !withRange && isToday(date) && !isSelectedDate(date),
+              'text-gray-300 !opacity-100 dark:text-gray-600 !cursor-not-allowed':
+                (!withRange && !isPastOrToday(date)) || (!withRange && isDisabledDate(date)),
+              'hover:bg-gray-100 hover:dark:bg-gray-700 hover:rounded': !isSelectedDate(date),
+
+              'bg-theme-for-range rounded-l-full': withRange && isRangeStart(String(date)),
+              'bg-theme-for-range rounded-r-full': withRange && isRangeEnd(String(date)),
+              'bg-theme-soft-for-range hover:!bg-gray-100 hover:dark:!bg-gray-700':
+                withRange && isInRange(String(date)),
+              'text-gray-300 dark:text-gray-600 !cursor-not-allowed':
+                (withRange && !isPastOrToday(date)) || (withRange && isDisabledDate(date)),
             },
           ]"
           :style="{ height: dateButtonHeight }"
           :disabled="!isPastOrToday(date) || isDisabledDate(date)"
           type="button"
-          @click.stop="isDisabledDate(date) ? handleDisabledDateClick(date) : selectDate(date)"
+          @click="handleDateClick(String(date))"
         >
+          <!-- @click.stop="isDisabledDate(date) ? handleDisabledDateClick(date) : selectDate(date)" -->
           <!-- :disabled="!isPastOrToday(date) || isDisabledDate(date)" -->
+
           <span
             v-if="dotActive && isToday(date)"
             class="absolute left-7 top-1 w-1 h-1 rounded-full"
@@ -563,6 +711,15 @@ button {
 
 .bg-theme {
   background-color: v-bind(theme);
+  color: v-bind(textColor);
+}
+.bg-theme-for-range {
+  background-color: v-bind(theme);
+  color: v-bind(textColor) !important;
+}
+.bg-theme-soft-for-range {
+  background-color: v-bind(theme);
+  opacity: 0.5 !important;
   color: v-bind(textColor);
 }
 .text-theme {

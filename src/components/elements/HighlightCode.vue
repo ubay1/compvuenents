@@ -52,7 +52,7 @@ watch(
         class="absolute top-2 right-2 text-xs py-1 px-2 rounded bg-gray-700 text-gray-300 hover:bg-gray-600 transition-colors duration-200 cursor-pointer"
         :class="{ 'bg-green-800 text-white hover:bg-green-800': copied }"
       >
-        {{ copied ? 'Tersalin!' : 'Salin' }}
+        {{ copied ? 'Copied' : 'Copy' }}
       </button>
     </div>
     <pre

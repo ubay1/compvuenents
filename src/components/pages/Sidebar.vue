@@ -16,7 +16,7 @@ onMounted(() => {
   >
     <div class="sticky top-6">
       <h3 class="text-xs font-semibold text-gray-500 dark:text-gray-300 uppercase tracking-wider">
-        Komponen
+        List
       </h3>
       <div class="mt-2 space-y-1">
         <RouterLink

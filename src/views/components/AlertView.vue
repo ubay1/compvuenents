@@ -71,7 +71,7 @@ const columnsEvents: TableColumn[] = [
 const dataEvents = [
   {
     name: 'close',
-    description: 'Event yang dijalankan saat user klik icon X',
+    description: 'Event triggered when user clicks the X icon',
   },
 ]
 
@@ -109,7 +109,7 @@ const showAlert = ref(true)
 
     <!-- Usage -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Usage</h4>
       <HighlightCode language="">
         {{ highlightCode }}
       </HighlightCode>

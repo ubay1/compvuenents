@@ -88,7 +88,7 @@ const value2 = ref(false)
 
     <!-- Usage -->
     <div class="mt-6">
-      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Penggunaan</h4>
+      <h4 class="text-lg font-medium text-gray-900 dark:text-gray-300">Usage</h4>
 
       <HighlightCode language="">
         {{ highlightCode }}

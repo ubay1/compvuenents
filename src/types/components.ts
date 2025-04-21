@@ -9,9 +9,10 @@ export interface IPropsCalendar {
   valueForDate?: { date: string; value: string }[]
   width?: string
   theme?: string
-  initialValue?: string
+  initialValue?: string | Record<string, unknown>
   disabledMinDate?: string // Format: YYYY-MM-DD
   disabledMaxDate: string // Format: YYYY-MM-DD
+  withRange?: boolean
 }
 
 export interface IPropsDatePicker {
