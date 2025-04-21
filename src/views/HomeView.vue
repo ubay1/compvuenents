@@ -10,7 +10,15 @@
     </div>
     <p class="mt-4 text-center text-gray-600 dark:text-gray-400">
       Vue 3 components collection built with Tailwind CSS. <br />
-      just copy and paste, no need for complicated installations
+      just copy and paste, no need for complicated installations <br />
+      <a
+        href="https://github.com/ubay1/compvuenents/tree/main/src/components/elements"
+        target="_blank"
+        rel="noopener noreferrer"
+        class="underline text-green-600"
+      >
+        Check components here
+      </a>
     </p>
   </div>
 </template>
